@@ -1,7 +1,6 @@
-import uniqid from 'uniqid';
-import { TheForm, Label, Input, SubmitBtn } from './Form.styled';
 import { useDispatch } from 'react-redux';
 import { addContacts } from 'redux/sliceContacts';
+import { Button, TextField } from '@mui/material';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -11,7 +10,6 @@ const Form = () => {
     const form = evt.target;
     dispatch(
       addContacts({
-        id: uniqid(),
         name: form.elements.name.value,
         number: form.elements.number.value,
       })
@@ -20,9 +18,9 @@ const Form = () => {
   };
 
   return (
-    <TheForm action="" onSubmit={handleSubmit}>
-      <Label htmlFor="name">Name</Label>
-      <Input
+    <form action="" onSubmit={handleSubmit}>
+      <label htmlFor="name">Name</label>
+      <TextField
         id="name"
         type="text"
         name="name"
@@ -33,8 +31,8 @@ const Form = () => {
         // onChange={handleChange}
       />
 
-      <Label htmlFor="tel">Number</Label>
-      <Input
+      <label htmlFor="tel">Number</label>
+      <TextField
         id="tel"
         type="tel"
         name="number"
@@ -45,8 +43,8 @@ const Form = () => {
         // onChange={handleChange}
       />
 
-      <SubmitBtn type="submit">Add contact</SubmitBtn>
-    </TheForm>
+      <Button type="submit">Add contact</Button>
+    </form>
   );
 };
 

@@ -1,12 +1,6 @@
+import { List, ListItem, ListItemButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContacts } from 'redux/sliceContacts';
-import {
-  ContactList,
-  ContactListItem,
-  ContactName,
-  ContactNumber,
-  DeleteButton,
-} from './Contacts.styled';
 
 const Contacts = () => {
   let contacts = useSelector(state => state.contacts);
@@ -23,20 +17,20 @@ const Contacts = () => {
     });
 
   return (
-    <ContactList>
+    <List>
       {contacts.map(el => {
         const { name, number, id } = el;
         return (
-          <ContactListItem key={id}>
-            <ContactName>{name}</ContactName>
-            <ContactNumber>{number}</ContactNumber>
-            <DeleteButton id={id} type="button" onClick={handleOnClick}>
+          <ListItem key={id}>
+            <span>{name}</span>
+            <span>{number}</span>
+            <ListItemButton id={id} type="button" onClick={handleOnClick}>
               Delete
-            </DeleteButton>
-          </ContactListItem>
+            </ListItemButton>
+          </ListItem>
         );
       })}
-    </ContactList>
+    </List>
   );
 };
 
