@@ -8,7 +8,6 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('/contacts');
-      // console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -36,7 +35,6 @@ export const deleteContacts = createAsyncThunk(
     try {
       await axios.delete(`/contacts/${arg}`);
       const response = await axios.get('/contacts');
-      // console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -44,17 +42,15 @@ export const deleteContacts = createAsyncThunk(
   }
 );
 
-// export const filterContacts = createAsyncThunk(
-//   'contacts/filterContacts',
-//   async (arg, thunkAPI) => {
-//     console.log(arg);
-//     try {
-//       const response = await axios.get(`/contacts?search=${arg}`);
-//       //  await axios.get('/contacts');
-//       console.log(response.data);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const filterContacts = createAsyncThunk(
+  'contacts/filterContacts',
+  async (arg, thunkAPI) => {
+    try {
+      const response = await axios.get(`/contacts?search=${arg}`);
+
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

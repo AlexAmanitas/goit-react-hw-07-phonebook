@@ -6,17 +6,15 @@ import { setFilter } from 'redux/sliceFilter';
 
 const Filter = () => {
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  console.log(filter);
 
   const handleChange = evt => {
     dispatch(setFilter(evt.currentTarget.value));
   };
 
-  const filter = useSelector(selectFilter);
-  console.log(filter);
-
   return (
     <Box>
-      {/* <label htmlFor="filter">Find contacts by name</label> */}
       <TextField
         variant="outlined"
         label="Find contacts by name"

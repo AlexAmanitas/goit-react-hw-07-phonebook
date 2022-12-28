@@ -1,30 +1,36 @@
-import { IconButton, List, ListItem, Typography } from '@mui/material';
+import { IconButton, List, ListItem, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContacts } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
+import {
+  fetchContacts,
+  deleteContacts,
+  filterContacts,
+} from 'redux/operations';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 const Contacts = () => {
   const { items, isLoading, error } = useSelector(selectContacts);
   const dispatch = useDispatch();
-  let contacts;
+
+  const filter = useSelector(selectFilter);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, []);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (filter === '') {
+      dispatch(fetchContacts());
+    } else {
+      dispatch(filterContacts(filter));
+    }
+  }, [dispatch, filter]);
 
   const handleOnClick = evt => {
     dispatch(deleteContacts(evt.currentTarget.id));
   };
-  // let contacts = items;
-  const filter = useSelector(state => state.filter.value);
-  if (filter !== '') {
-    contacts = items.filter(contact => {
-      return contact.name.toLowerCase().includes(filter.toLowerCase());
-    });
-  }
-  console.log(contacts);
+
+  console.log('contacts');
 
   return (
     <List>
@@ -33,13 +39,13 @@ const Contacts = () => {
       {items.map(el => {
         const { name, phone, id } = el;
         return (
-          <ListItem key={id}>
-            <Typography variant="body1" component="span" sx={{ mr: '10px' }}>
+          <ListItem key={id} alignItems="flex-start">
+            <ListItemText variant="body1" component="span" sx={{ mr: '10px' }}>
               {name}
-            </Typography>
-            <Typography variant="body1" component="span" sx={{ mr: '10px' }}>
+            </ListItemText>
+            <ListItemText variant="body1" component="span" sx={{ mr: '10px' }}>
               {phone}
-            </Typography>
+            </ListItemText>
             <IconButton id={id} type="button" onClick={handleOnClick}>
               <DeleteIcon />
             </IconButton>
