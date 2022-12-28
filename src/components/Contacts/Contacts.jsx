@@ -14,9 +14,6 @@ const Contacts = () => {
   const dispatch = useDispatch();
 
   const filter = useSelector(selectFilter);
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, []);
 
   useEffect(() => {
     if (filter === '') {
