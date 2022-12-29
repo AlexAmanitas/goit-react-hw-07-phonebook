@@ -7,7 +7,6 @@ import { setFilter } from 'redux/sliceFilter';
 const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
-  console.log(filter);
 
   const handleChange = evt => {
     dispatch(setFilter(evt.currentTarget.value));
