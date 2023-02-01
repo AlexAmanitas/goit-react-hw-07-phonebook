@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addContacts } from 'redux/operations';
-import { Box, Button, TextField } from '@mui/material';
 import uniqid from 'uniqid';
+import { TheForm, Label, Input, SubmitBtn } from './Form.styled';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -20,35 +20,27 @@ const Form = () => {
   };
 
   return (
-    <Box component="form" action="" onSubmit={handleSubmit}>
-      <TextField
-        id="outlined-basic"
-        label="Name"
-        variant="outlined"
+    <TheForm action="" onSubmit={handleSubmit}>
+      <Label htmlFor="name">Name</Label>
+      <Input
+        id="name"
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        sx={{ mb: '20px' }}
-        // value={name}
-        // onChange={handleChange}
+        required
       />
-
-      {/* <label htmlFor="tel">Number</label> */}
-      <TextField
-        label="Number"
+      <Label htmlFor="tel">Number</Label>
+      <Input
         id="tel"
         type="tel"
         name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        sx={{ mb: '10px' }}
-        // value={number}
-        // onChange={handleChange}
+        required
       />
-
-      <Button type="submit">Add contact</Button>
-    </Box>
+      <SubmitBtn type="submit">Add contact</SubmitBtn>
+    </TheForm>
   );
 };
 

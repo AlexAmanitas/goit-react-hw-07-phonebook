@@ -1,5 +1,10 @@
-import { IconButton, List, ListItem, ListItemText } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  ContactList,
+  ContactListItem,
+  ContactName,
+  ContactNumber,
+  DeleteButton,
+} from './Contacts.styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -30,26 +35,26 @@ const Contacts = () => {
   console.log('contacts');
 
   return (
-    <List>
+    <ContactList>
       {isLoading && <b>Loading contacts...</b>}
       {error && <b>{error}</b>}
       {items.map(el => {
         const { name, phone, id } = el;
         return (
-          <ListItem key={id} alignItems="flex-start">
-            <ListItemText variant="body1" component="span" sx={{ mr: '10px' }}>
+          <ContactListItem key={id} alignItems="flex-start">
+            <ContactName variant="body1" component="span" sx={{ mr: '10px' }}>
               {name}
-            </ListItemText>
-            <ListItemText variant="body1" component="span" sx={{ mr: '10px' }}>
+            </ContactName>
+            <ContactNumber variant="body1" component="span" sx={{ mr: '10px' }}>
               {phone}
-            </ListItemText>
-            <IconButton id={id} type="button" onClick={handleOnClick}>
-              <DeleteIcon />
-            </IconButton>
-          </ListItem>
+            </ContactNumber>
+            <DeleteButton id={id} type="button" onClick={handleOnClick}>
+              Delete
+            </DeleteButton>
+          </ContactListItem>
         );
       })}
-    </List>
+    </ContactList>
   );
 };
 
