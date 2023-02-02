@@ -1,19 +1,28 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/operations';
 import uniqid from 'uniqid';
 import { TheForm, Label, Input, SubmitBtn } from './Form.styled';
 
 const Form = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
 
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+    const check = contacts.find(
+      el => el.name.toLowerCase() === name.toLowerCase()
+    );
+    if (check) {
+      return alert(`${name} is already exist.`);
+    }
     dispatch(
       addContacts({
         id: uniqid(),
-        name: form.elements.name.value,
-        phone: form.elements.number.value,
+        name,
+        number,
       })
     );
     form.reset();
